@@ -1,0 +1,31 @@
+.container {
+  border: 1px solid #3dbdf6;
+  border-radius: 10px;
+  background: #ffffff;
+  display: flex;
+  width: fit-content;
+}
+
+.itemWrp {
+  position: relative;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  padding: 2px 13px;
+  color: #3dbdf6;
+  cursor: pointer;
+  z-index: 5;
+  transition: color .25s linear;
+}
+
+.current {
+  color: #ffffff;
+}
+
+// .active {
+//   top: 0;
+//   left: 0;
+//   width: 20px;
+//   border-radius: '10px',
+//   font-weight: 600;
+// }

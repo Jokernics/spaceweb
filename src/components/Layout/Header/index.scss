@@ -1,0 +1,43 @@
+.header {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: right;
+  color: #7a8185;
+  padding: 20px 0;
+
+  .header-container {
+    padding-right: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .header-burger {
+      display: none;
+
+      @media screen and (max-width: 768.98px) {
+        width: 20px;
+        height: 16px;
+        margin-right: auto;
+        background-image: url(../../../assets/images/blackBurger.svg);
+        margin-left: 20px;
+        display: block;
+
+        &.hidden {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .header__price {
+    margin-right: 32px;
+  }
+
+  .header__name {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    margin-right: 24px;
+  }
+}

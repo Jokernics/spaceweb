@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import viewSlice from '../features/view/viewSlice';
+import vpsSlice from '../features/vps/vpsSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    view: viewSlice,
+    vps: vpsSlice
   },
 });

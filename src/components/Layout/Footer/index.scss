@@ -1,0 +1,37 @@
+.footer {
+  flex: 0 0 auto;
+}
+
+.footer-wraper {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #000000;
+}
+
+.license-wraper {
+  .license__link {
+    color: #3dbdf6;
+  }
+}
+
+.footer__apps-wrp {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  .footer__apps {
+    display: flex;
+    gap: 10px;
+  }
+
+}
+
+.footer-calls {
+  .footer-call-link {
+    color: #3dbdf6;
+  }
+}

@@ -1,0 +1,171 @@
+.vps-container {
+  width: 100%;
+  height: 100%;
+  padding: 17px 20px 20px 20px;
+  background: #ffffff;
+  box-shadow: 1px 1px 4px #e3e9ec;
+
+  .vps__account {
+    border-bottom: 2px solid #f7fafb;
+
+    &_line-1 {
+      font-weight: 300;
+      font-size: 12px;
+      line-height: 15px;
+      text-transform: uppercase;
+      color: #062436;
+      margin-bottom: 11px;
+    }
+
+    &_line-2 {
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+      text-transform: uppercase;
+      color: #062436;
+      margin-bottom: 16px;
+    }
+  }
+
+  .vps-wrp {
+    padding-top: 17px;
+    padding-bottom: 30px;
+
+    .vps-title-1 {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 15px;
+      color: #7a8185;
+      margin-bottom: 12px;
+    }
+
+    .vps-select-category {
+      width: 232px;
+      margin-bottom: 20px;
+
+      @media screen and (max-width: 768.98px) {
+        width: 100%;
+      }
+    }
+  }
+
+  .vps-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    @media screen and (max-width: 767.98px) {
+      width: calc(100vw - 2em);
+      justify-content: center;
+      margin-left: 0;
+      transition: margin-left 0.25s linear;
+      overflow: hidden;
+    }
+
+    @media screen and (max-width: 374.98px) {
+      width: 100%;
+      
+      .vps-item {
+        width: 100%;
+      }
+    }
+  }
+
+  .vps-item {
+    padding: 20px;
+    padding-bottom: 24px;
+    width: 232px;
+    border-radius: 4px;
+
+    
+
+    &__icon {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 15px;
+      color: #000000;
+      margin-bottom: 14px;
+    }
+
+    &__price {
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+      color: #000000;
+      margin-bottom: 18px;
+    }
+
+    &__line {
+      display: flex;
+      gap: 9px;
+      align-items: baseline;
+      margin-bottom: 16px;
+      &:last-child {
+        margin-bottom: 20px;
+      }
+    }
+
+    &__cpu {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 15px;
+      color: #62686c;
+    }
+
+    &__frequency {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+      color: #000000;
+    }
+
+    &__dist-wrp {
+      margin-bottom: 23px;
+    }
+
+    &__dist_title {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 15px;
+      color: #62686c;
+      margin-bottom: 8px;
+    }
+
+    &__data-centre {
+      margin-bottom: 20px;
+    }
+
+    &__dist-radio {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .vps-item-dops-wrp {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 27px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    align-items: center;
+    color: #000000;
+    cursor: pointer;
+
+    .vps-item-dops-text {
+      max-width: 129px;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+.child {
+  max-height: 180px;
+  transition: max-height 0.25s linear;
+  overflow: hidden;
+}
+
+.hidden {
+  max-height: 0;
+}
+

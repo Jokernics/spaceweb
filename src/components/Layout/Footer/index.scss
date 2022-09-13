@@ -10,9 +10,21 @@
   font-size: 12px;
   line-height: 15px;
   color: #000000;
+  flex-wrap: wrap;
+  gap: 0 50px;
+
+  @media screen and (max-width: 600.98px) {
+    gap: 5px;
+  }
+
+  @media screen and (max-width: 471.98px) {
+    gap: 20px;
+  }
 }
 
 .license-wraper {
+  height: max-content;
+
   .license__link {
     color: #3dbdf6;
   }
@@ -22,7 +34,7 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-
+  
   .footer__apps {
     display: flex;
     gap: 10px;

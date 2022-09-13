@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useState } from "react";
 import CustomRadio from "../../components/UI/CustomRadio/CustomRadio";
 import CustomSelect from "../../components/UI/CustomSelect/CustomSelect";
@@ -19,10 +19,11 @@ export default function VpsItem({
   selectPanel
 }) {
   const dispatch = useDispatch()
-  const [currentDist, setCurrentDist] = useState(selectOs[0]);
+  const [price, setPrice] = useState(tariff.price_per_month);
   const dists = useMemo(() => selectOs.map(item => {
     return { label: item.description, value: item }
   }), [selectOs])
+  const [currentDist, setCurrentDist] = useState(dists[0]);
 
   const handleDists = useCallback(
     (value) => {
@@ -33,7 +34,7 @@ export default function VpsItem({
 
 
   const os = useMemo(() => {
-    return currentDist.panel_type.map(item => {
+    return currentDist.value.panel_type.map(item => {
       const osTypes = selectPanel.filter(el => el.name.includes(item))
       return osTypes.map(el => {
         return { label: el.description, value: el }
@@ -41,15 +42,18 @@ export default function VpsItem({
     }).reduce((prev, cur) => [...prev, ...cur],)
   }, [currentDist, selectPanel])
 
-  const [currentOs, setCurrentOs] = useState(os[0].value);
+  const [currentOs, setCurrentOs] = useState(os[0]);
 
 
   const handleOs = useCallback(
     (value) => {
+      const total = tariff.price_per_month + value.value.price
+      setPrice(total)
       setCurrentOs(value)
     },
-    [],
+    [tariff.price_per_month],
   )
+
 
   const dataCenteres = useMemo(() => {
     return tariff.datacenters.map(item => {
@@ -58,7 +62,7 @@ export default function VpsItem({
     })
   }, [datacenters, tariff.datacenters])
 
-  const [currentLocation, setCurrentLocation] = useState(dataCenteres[0].value);
+  const [currentLocation, setCurrentLocation] = useState(dataCenteres[0]);
 
   const handleDataCenter = useCallback(
     (datacenter) => {
@@ -79,8 +83,13 @@ export default function VpsItem({
     setIsDops(prev => !prev)
   }
   const handleBubmit = () => {
-    dispatch(setDelectedTariff({ currentOs, currentLocation, currentDist }))
-
+    dispatch(setDelectedTariff({ 
+      tariff,
+      dist: currentDist.value,
+      os: currentOs.value, 
+      location: currentLocation.value, 
+      dops: isDops ? dops : null
+    }))
   }
   return (
     <div className='vps-item' style={{ backgroundColor: backgroundColor }} >
@@ -88,13 +97,14 @@ export default function VpsItem({
         <Icon />
         <span>{tariff.name}</span>
       </div>
-      <p className="vps-item__price">{`${numberWithSpaces(tariff.price_per_month)} ₽/мес.`}</p>
+      <p className="vps-item__price">{`${numberWithSpaces(price)} ₽/мес.`}</p>
       <p className="vps-item__line"><span className="vps-item__cpu">CPU </span><span className="vps-item__frequency">{`${tariff.cpu_cores} × ${frequency}`} ГГц</span></p>
       <p className="vps-item__line"><span className="vps-item__cpu">RAM </span><span className="vps-item__frequency">{`${tariff.ram}`} МБ</span></p>
       <p className="vps-item__line"><span className="vps-item__cpu">DISK </span><span className="vps-item__frequency">{`${tariff.volume_disk} ${tariff.disk_type}`}</span></p>
       <div className="vps-item__dist-wrp">
         <p className="vps-item__dist_title">Дистрибутив</p>
         <CustomSelect
+          value={currentDist}
           options={dists}
           onChange={handleDists}
         />
@@ -102,6 +112,7 @@ export default function VpsItem({
       <div className="vps-item__dist-wrp">
         <p className="vps-item__dist_title">Программное обеспечение</p>
         <CustomSelect
+          value={currentOs}
           options={os}
           onChange={handleOs}
         />
@@ -110,7 +121,7 @@ export default function VpsItem({
         <p className="vps-item__dist_title">Дата-центр</p>
         <div className="vps-item__dist-radio">
           <CustomRadio
-            id={tariff.id}
+            value={currentLocation}
             options={dataCenteres}
             onChange={handleDataCenter}
           />

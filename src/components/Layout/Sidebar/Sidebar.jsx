@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as Logo } from '../../../assets/images/logo.svg';
 import './index.scss';
@@ -15,7 +15,7 @@ export default function Sidebar() {
   return (
     <div className={`${isOpen ? '' : 'hidden'} sideBar`}>
       <div className='sidebar-header'>
-        <Logo />
+        <Link to='/'><div><Logo /></div></Link>
         <div onClick={() => dispatch(toggleView())} className='burger'></div>
       </div>
       <div className="sidebar-body">

@@ -3,24 +3,28 @@ import CustomSelect from '../../components/UI/CustomSelect/CustomSelect'
 import './index.scss'
 import VpsList from './VpsList'
 
-export default function VpsSection({result}) {
+export default function VpsSection({ result }) {
   let { categories, vpsPlans, datacenters, osPanel, selectOs, selectPanel } = result
 
-  const [currentCategoryId, setCurrentCategoryId] = useState('all');
-  categories = categories.map(item => {
-    return { label: item.name, value: item.id }
-  })
+  
+  categories = useMemo(() => {
+    let all = categories.map(item => {
+      return { label: item.name, value: item.id }
+    })
+    all = [{ label: 'Все', value: 'all' }, ...all]
+    return all
+  }, [categories])
 
-  const handleSelecectedCategory = (id) => {
-    setCurrentCategoryId(id)
+  const [currentCategory, setCurrentCategory] = useState(categories[0]);
+
+  const handleSelecectedCategory = (category) => {
+    setCurrentCategory(category)
   }
 
   const tariffs = useMemo(() => {
-    if (currentCategoryId === 'all') return vpsPlans
-    return vpsPlans.filter(plan => plan.category_id === currentCategoryId)
-  }, [currentCategoryId, vpsPlans])
-
- 
+    if (currentCategory.value === 'all') return vpsPlans
+    return vpsPlans.filter(plan => plan.category_id === currentCategory.value)
+  }, [currentCategory, vpsPlans])
 
   return (
 
@@ -33,8 +37,9 @@ export default function VpsSection({result}) {
         <p className='vps-title-1'>Категория</p>
         <div className='vps-select-category'>
           <CustomSelect
+            value={currentCategory}
             onChange={handleSelecectedCategory}
-            options={[{ label: 'Все', value: 'all' }, ...categories]}
+            options={categories}
           />
         </div>
         <VpsList

@@ -8,11 +8,13 @@ export default function VpsList({ tariffs, datacenters, osPanel, selectOs, selec
 
   return (
     <div className={`vps-list-container`}>
-      {tariffs.map(tariff =>
-        <VpsItem key={tariff.id}
-          {...{tariff, datacenters, osPanel, selectOs, selectPanel}}
-        />
-      )}
+      <div className="vps-list-wrapper">
+        {tariffs.map(tariff =>
+          <VpsItem key={tariff.id}
+            {...{tariff, datacenters, osPanel, selectOs, selectPanel}}
+          />
+        )}
+      </div>
     </div>
   )
 }

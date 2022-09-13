@@ -1,49 +1,40 @@
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './CustomRadio.module.scss';
 
 
-export default function CustomRadio({ options, onChange, id }) {
-  const [current, setCurrent] = useState(0);
- 
-  const handleClick = (i, option) => {
-    if (i === current) return
-    setCurrent(i)
+export default function CustomRadio({ options, value, onChange }) {
+  const bubbleEl = useRef(null)
+  const [bubbleWidth, setBubbleWidth] = useState(0);
+  const [bubbleLeft, setBubbleLeft] = useState(0);
+
+  useEffect(() => {
+    const left = bubbleEl.current.offsetLeft
+    const width = bubbleEl.current.offsetWidth
+    setBubbleLeft(left - 1)
+    setBubbleWidth(width + 2)
+  }, [value]);
+
+  const handleClick = (e, option) => {
     onChange(option)
   }
 
   return (
     <div className={styles.container}>
-      {options.map((option, i) => {
-        const isSelected = current === i
-        return (<motion.div key={option.label + i} onClick={() => handleClick(i, option)} className={`${styles.itemWrp} ${isSelected ? styles.current : ''}`}>
-          {option.label}
-          {isSelected && (
-            activeLine(id)
-          )}
-        </motion.div>)
+      {options.map(option => {
+        const isCurrent = value.label === option.label
+        const classnames = `${isCurrent ? styles.current : ''} ${styles.itemWrp}`
+
+        return (
+          <div ref={isCurrent ? bubbleEl : null} key={option.label} onClick={(e) => handleClick(e, option)} className={classnames}>
+            {option.label}
+          </div>)
       })}
+      <div 
+        style={{
+          width: bubbleWidth,
+          left: bubbleLeft
+        }}
+      className={styles.bubble}></div>
     </div>
-  )
-}
-function activeLine(id) {
-  return (
-    <motion.div
-      className={styles.active}
-      layoutId={`${id}`}
-      style={{
-        position: 'absolute',
-        top: -1,
-        left: -1,
-        zIndex: -1,
-        padding: '3px',
-        width: 'calc(100% + 2px)',
-        height: 'calc(100% + 2px)',
-        background: '#3dbdf6',
-        border: '2px solid #3dbdf6',
-        borderRadius: '10px',
-        fontWeight: '600',
-      }}
-    />
   )
 }

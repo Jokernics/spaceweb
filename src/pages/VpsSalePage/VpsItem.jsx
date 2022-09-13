@@ -1,14 +1,13 @@
-import { useCallback, useEffect, useMemo } from "react";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
+import { ReactComponent as PlusIcon } from '../../assets/images/plus.svg';
+import { ReactComponent as ArrowIcon } from '../../assets/images/selectArrow.svg';
 import CustomRadio from "../../components/UI/CustomRadio/CustomRadio";
 import CustomSelect from "../../components/UI/CustomSelect/CustomSelect";
 import TariffBtn from "../../components/UI/TariffBtn/TariffBtn";
-import { numberWithSpaces } from "../../utils/numberWithSpaces";
-import { vpsData1 } from "./vpsdata"
-import { ReactComponent as PlusIcon } from '../../assets/images/plus.svg';
-import { ReactComponent as ArrowIcon } from '../../assets/images/selectArrow.svg';
 import { setDelectedTariff } from "../../features/vps/vpsSlice";
-import { useDispatch } from "react-redux";
+import { numberWithSpaces } from "../../utils/numberWithSpaces";
+import { vpsData1 } from "./vpsdata";
 
 
 export default function VpsItem({

@@ -51,10 +51,11 @@
 
   .vps-list-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 
     @media screen and (max-width: 768.98px) {
       width: calc(100vw - 2em);
+      justify-content: center;
     }
     
 
@@ -65,7 +66,7 @@
       
 
       @media screen and (max-width: 768.98px) {
-        
+      justify-content: center;
         margin-left: 0;
         transition: margin-left 0.25s linear;
         overflow: hidden;
